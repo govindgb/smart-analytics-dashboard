@@ -1,44 +1,31 @@
+"use client";
+
+import { useState } from "react";
+import Sidebar from "@/components/layout/Sidebar";
+import Topbar from "@/components/layout/Topbar";
+import StatsCard from "@/components/ui/StatsCard";
+import RevenueChart from "@/components/ui/RevenueChart";
+import FilterBar from "@/components/ui/FilterBar";
 export default function Home() {
+  const [range, setRange] = useState("7d");
+
   return (
     <div className="flex h-screen">
-      {/* Sidebar */}
-      <aside className="w-64 bg-gray-900 text-white p-5">
-        <h2 className="text-xl font-bold mb-6">Analytics</h2>
-        <ul className="space-y-3">
-          <li className="hover:text-gray-300 cursor-pointer">Dashboard</li>
-          <li className="hover:text-gray-300 cursor-pointer">Reports</li>
-          <li className="hover:text-gray-300 cursor-pointer">Settings</li>
-        </ul>
-      </aside>
+      <Sidebar />
 
-      {/* Main Content */}
       <div className="flex-1 bg-gray-100 p-6">
-        {/* Topbar */}
-        <div className="mb-6 flex justify-between items-center">
-          <h1 className="text-2xl font-semibold">Dashboard</h1>
-          <button className="bg-black text-white px-4 py-2 rounded">
-            Export
-          </button>
-        </div>
+        <Topbar />
 
-        {/* Cards Section */}
+        <FilterBar selected={range} onChange={setRange} />
+
         <div className="grid grid-cols-3 gap-6">
-          <div className="bg-white p-5 rounded shadow">
-            <p className="text-gray-500">Revenue</p>
-            <h2 className="text-2xl font-bold">$12,340</h2>
-          </div>
-
-          <div className="bg-white p-5 rounded shadow">
-            <p className="text-gray-500">Users</p>
-            <h2 className="text-2xl font-bold">1,230</h2>
-          </div>
-
-          <div className="bg-white p-5 rounded shadow">
-            <p className="text-gray-500">Growth</p>
-            <h2 className="text-2xl font-bold">+18%</h2>
-          </div>
+          <StatsCard title="Revenue" value="$12,340" />
+          <StatsCard title="Users" value="1,230" />
+          <StatsCard title="Growth" value="+18%" />
         </div>
+
+       <RevenueChart range={range} />
       </div>
     </div>
   );
-}
+}s
